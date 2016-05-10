@@ -1,9 +1,9 @@
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask_migrate import upgrade as upgrade_database
-from sms2fa_flask import app, db, prepare_app
+from sms2fa_flask import db, prepare_app
 
-prepare_app(environment='development')
+app = prepare_app(environment='development')
 migrate = Migrate(app, db)
 
 manager = Manager(app)
@@ -16,7 +16,7 @@ def test():
     import sys
     import unittest
     prepare_app(environment='test')
-    # upgrade_database() Enable when models get created
+    upgrade_database()
     tests = unittest.TestLoader().discover('.', pattern="*_tests.py")
     test_result = unittest.TextTestRunner(verbosity=2).run(tests)
 
