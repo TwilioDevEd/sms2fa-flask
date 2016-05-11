@@ -5,6 +5,7 @@ from flask.ext.login import login_user
 from . import app
 from .models import User
 from .forms import LoginForm
+from .confirmation_sender import send_confirmation_code
 
 
 @app.route('/')
@@ -37,6 +38,6 @@ def confirmation():
     if not user_id:
         flask.abort(401)
     user = User.query.get(user_id)
-    if request.method == 'GET':
-        session['confirmation_code'] = '1234'
+    code = send_confirmation_code(user.international_phone_number)
+    session['confirmation_code'] = code
     return render_template('confirmation.html', user=user)

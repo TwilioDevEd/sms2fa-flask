@@ -1,10 +1,13 @@
 from .base import BaseTest
 from flask import url_for, session
 from flask.ext.login import current_user
-try:
-    from urlparse import urlparse
-except:
+import six
+from mock import MagicMock
+from sms2fa_flask import views
+if six.PY3:
     from urllib.parse import urlparse
+else:
+    from urlparse import urlparse
 
 
 class RootTest(BaseTest):
@@ -48,14 +51,17 @@ class RootTest(BaseTest):
         self.assertEquals(401, response.status_code)
 
     def test_confirmation_page_puts_confirmation_code_on_session(self):
+        views.send_confirmation_code = MagicMock(return_value='random_code')
         with self.app.test_client() as client:
             with client.session_transaction() as current_session:
                 current_session['user_id'] = self.email
             response = client.get(url_for('confirmation'))
             self.assertEquals(200, response.status_code)
             self.assertIn('confirmation_code', session)
+            self.assertEquals('random_code', session['confirmation_code'])
 
     def test_confirmation_page_shows_current_phone(self):
+        views.send_confirmation_code = MagicMock(return_value='1234')
         with self.app.test_client() as client:
             with client.session_transaction() as current_session:
                 current_session['user_id'] = self.email
