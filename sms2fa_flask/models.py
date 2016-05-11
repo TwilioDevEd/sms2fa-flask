@@ -1,11 +1,12 @@
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import UserMixin
 import bcrypt
 import phonenumbers
 from phonenumbers import PhoneNumberFormat
 db = SQLAlchemy()
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
 
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
@@ -21,9 +22,6 @@ class User(db.Model):
         return bcrypt.hashpw(pwd, pwd_hash) == pwd_hash
 
     # The methods below are required by flask-login
-    def is_authenticated(self):
-        return self.authenticated
-
     def is_active(self):
         return True
 

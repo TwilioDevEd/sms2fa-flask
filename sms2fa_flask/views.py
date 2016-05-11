@@ -26,7 +26,7 @@ def login():
         user = User.query.get(form.email.data)
         if user:
             if user.password_valid(form.password.data.encode('utf8')):
-                session['user_id'] = user.email
+                session['user_email'] = user.email
                 return redirect(url_for('confirmation'))
         flash('Wrong user/password.', 'error')
     return render_template('login.html', form=form)
@@ -34,10 +34,15 @@ def login():
 
 @app.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
-    user_id = session.get('user_id', None)
+    user_id = session.get('user_email', None)
     if not user_id:
         flask.abort(401)
     user = User.query.get(user_id)
+    if request.method == 'POST':
+        given_code = request.form['verification_code']
+        if given_code == session['confirmation_code']:
+            login_user(user)
+            return redirect(url_for('secret_page'))
     code = send_confirmation_code(user.international_phone_number)
     session['confirmation_code'] = code
     return render_template('confirmation.html', user=user)
