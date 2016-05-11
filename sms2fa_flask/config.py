@@ -8,6 +8,9 @@ class DefaultConfig(object):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = ('sqlite:///' +
                                os.path.join(basedir, 'default.sqlite'))
+    TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', None)
+    TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN', None)
+    TWILIO_NUMBER = os.environ.get('TWILIO_NUMBER', None)
 
 
 class DevelopmentConfig(DefaultConfig):

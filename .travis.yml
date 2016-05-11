@@ -10,6 +10,9 @@ env:
   - DEBUG=False
   - SECRET=SuperSecret
   - SQLALCHEMY_DATABASE_URI=sqlite://survey.sqlite
+  - TWILIO_ACCOUNT_SID=AC2XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  - TWILIO_AUTH_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  - TWILIO_NUMBER=+15551230987
 script:
   - coverage run --source=sms2fa_flask manage.py test
 after_script:
