@@ -17,7 +17,7 @@ class User(db.Model):
     active = db.Column(db.Boolean, default=False)
 
     def password_valid(self, pwd):
-        pwd_hash = self.password
+        pwd_hash = self.password.decode('utf8').encode('utf8')
         return bcrypt.hashpw(pwd, pwd_hash) == pwd_hash
 
     # The methods below are required by flask-login
