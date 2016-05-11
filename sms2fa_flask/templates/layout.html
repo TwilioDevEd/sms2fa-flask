@@ -1,3 +1,4 @@
+{% import "bootstrap/utils.html" as util %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -48,24 +49,17 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    {% with error_messages = get_flashed_messages(category_filter=["error"]) %}
-        {% if error_messages %}
-            {% for error_message in error_messages %}
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button aria-label="Close" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{ error_message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+    {{ util.flashed_messages(dismissible=True) }}
     <div class="container">
       {% block content %}{% endblock content %}
     </div>
     <footer class="container">
       Made with <i class="fa fa-heart"></i> by your pals <a href="http://www.twilio.com">@twilio</a>
     </footer>
-    <script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script
+           src="https://code.jquery.com/jquery-2.2.3.min.js"
+           integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
+           crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </body>
 </html>

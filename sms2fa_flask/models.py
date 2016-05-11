@@ -1,5 +1,7 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 import bcrypt
+import phonenumbers
+from phonenumbers import PhoneNumberFormat
 db = SQLAlchemy()
 
 
@@ -7,6 +9,7 @@ class User(db.Model):
 
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
+    phone_number = db.Column(db.String)
     email = db.Column(db.String, primary_key=True)
     password = db.Column(db.String)
     active = db.Column(db.String)
@@ -29,3 +32,9 @@ class User(db.Model):
 
     def get_id(self):
         return self.email
+
+    @property
+    def international_phone_number(self):
+        parsed_number = phonenumbers.parse(self.phone_number)
+        return phonenumbers.format_number(parsed_number,
+                                          PhoneNumberFormat.INTERNATIONAL)

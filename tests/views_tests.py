@@ -54,3 +54,12 @@ class RootTest(BaseTest):
             response = client.get(url_for('confirmation'))
             self.assertEquals(200, response.status_code)
             self.assertIn('confirmation_code', session)
+
+    def test_confirmation_page_shows_current_phone(self):
+        with self.app.test_client() as client:
+            with client.session_transaction() as current_session:
+                current_session['user_id'] = self.email
+            response = client.get(url_for('confirmation'))
+        self.assertEquals(200, response.status_code)
+        self.assertIn(self.default_user.international_phone_number,
+                      response.data.decode('utf8'))

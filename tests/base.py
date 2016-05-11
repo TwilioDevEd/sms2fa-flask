@@ -16,5 +16,6 @@ class BaseTest(XmlTestCase):
         self.password = '1234'.encode('utf8')
         pwd_hash = bcrypt.hashpw(self.password, bcrypt.gensalt())
         self.default_user = User(email=self.email,
+                                 phone_number='+555155555555',
                                  password=pwd_hash)
         db.save(self.default_user)

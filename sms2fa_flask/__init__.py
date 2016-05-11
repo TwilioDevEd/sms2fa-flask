@@ -3,8 +3,10 @@ from sms2fa_flask.models import db, User
 from flask import Flask
 
 from flask.ext.login import LoginManager
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+Bootstrap(app)
 login_manager = LoginManager()
 
 
