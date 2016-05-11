@@ -6,9 +6,13 @@
 <div class="container">
     <form method="POST" action="/login" class="form-horizontal">
         {{ form.csrf_token }}
-        {{ wtf.form_field(form.email) }}
-        {{ wtf.form_field(form.password) }}
-        <input type="submit" value="Sign In" class="btn btn-success">
+        {{ wtf.form_field(form.email, form_type='horizontal') }}
+        {{ wtf.form_field(form.password, form_type='horizontal') }}
+        <div class='form-group'>
+            <div class='col-sm-offset-2 col-sm-10'>
+                <input type="submit" value="Sign In" class="btn btn-success">
+            </div>
+        </div>
     </form>
 </div>
 {% endblock %}
