@@ -10,6 +10,8 @@ class User(db.Model):
     email = db.Column(db.String, primary_key=True)
     password = db.Column(db.String)
     active = db.Column(db.String)
+    authenticated = db.Column(db.Boolean, default=False)
+    active = db.Column(db.Boolean, default=False)
 
     def password_valid(self, pwd):
         pwd_hash = self.password
