@@ -17,7 +17,7 @@ def root():
 @app.route('/secret-page')
 @login_required
 def secret_page():
-    return ''
+    return render_template('secrets.html')
 
 
 @app.route('/sign-up', methods=['GET', 'POST'])
