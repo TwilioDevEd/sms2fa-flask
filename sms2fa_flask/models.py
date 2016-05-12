@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
         return user
 
     def set_password(self, new_password):
-        new_password = new_password.decode('utf8').encode('utf8')
+        new_password = new_password.encode('utf8')
         hashed_password = bcrypt.hashpw(new_password, bcrypt.gensalt())
         self.password = hashed_password
 
