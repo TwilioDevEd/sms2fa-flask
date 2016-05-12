@@ -3,9 +3,8 @@ from . import app
 import random
 
 
-def send_confirmation_code(to_number, code=None):
-    if not code:
-        code = str(random.randrange(100000, 999999))
+def send_confirmation_code(to_number):
+    code = generate_code()
     account_sid = app.config['TWILIO_ACCOUNT_SID']
     auth_token = app.config['TWILIO_AUTH_TOKEN']
     twilio_number = app.config['TWILIO_NUMBER']

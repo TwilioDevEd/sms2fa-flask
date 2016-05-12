@@ -13,13 +13,6 @@ class User(db.Model, UserMixin):
     phone_number = db.Column(db.String)
     email = db.Column(db.String, primary_key=True)
     password = db.Column(db.String)
-    active = db.Column(db.String)
-    authenticated = db.Column(db.Boolean, default=False)
-    active = db.Column(db.Boolean, default=False)
-
-    def password_valid(self, pwd):
-        pwd_hash = self.password.decode('utf8').encode('utf8')
-        return bcrypt.hashpw(pwd, pwd_hash) == pwd_hash
 
     @classmethod
     def save_from_dict(cls, data):
@@ -29,10 +22,20 @@ class User(db.Model, UserMixin):
         db.save(user)
         return user
 
+    def password_valid(self, pwd):
+        pwd_hash = self.password.decode('utf8').encode('utf8')
+        return bcrypt.hashpw(pwd, pwd_hash) == pwd_hash
+
     def set_password(self, new_password):
         new_password = new_password.encode('utf8')
         hashed_password = bcrypt.hashpw(new_password, bcrypt.gensalt())
         self.password = hashed_password
+
+    @property
+    def international_phone_number(self):
+        parsed_number = phonenumbers.parse(self.phone_number)
+        return phonenumbers.format_number(parsed_number,
+                                          PhoneNumberFormat.INTERNATIONAL)
 
     # The methods below are required by flask-login
     def is_active(self):
@@ -43,9 +46,3 @@ class User(db.Model, UserMixin):
 
     def get_id(self):
         return self.email
-
-    @property
-    def international_phone_number(self):
-        parsed_number = phonenumbers.parse(self.phone_number)
-        return phonenumbers.format_number(parsed_number,
-                                          PhoneNumberFormat.INTERNATIONAL)
