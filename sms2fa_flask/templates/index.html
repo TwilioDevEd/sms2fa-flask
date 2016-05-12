@@ -2,5 +2,5 @@
 {% block content %}
 <h1>Two Factor Authentication with Twilio</h1>
 <p>Doing two-factor authentication (2FA) at a level of excellence can be tricky. Let's demonstrate how to use the <a href="https://www.twilio.com/">Twilio</a> API to make implementing 2FA a snap.</p>
-<p><a href="/users/new">Sign Up</a> or <a href="/sessions/new">Sign In</a> to get started.</p>
+<p><a href="{{ url_for('sign_up') }}">Sign Up</a> or <a href="{{ url_for('login') }}">Sign In</a> to get started.</p>
 {% endblock %}
