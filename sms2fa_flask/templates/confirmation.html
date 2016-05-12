@@ -3,7 +3,7 @@
 <h1>{{user.international_phone_number}}</h1>
 <p>We have sent you a SMS with a code to the number above.</p>
 <p>To complete your phone number verification, please enter the 6-digits activation code.</p>
-<form class="form-horizontal" action="/confirmations" accept-charset="UTF-8" method="post">
+<form class="form-horizontal" action="{{ url_for('confirmation') }}" accept-charset="UTF-8" method="post">
   <div class='form-group'>
     <label class="col-md-2 control-label" for="verification_code">Verification code</label>
     <div class='col-sm-10'>

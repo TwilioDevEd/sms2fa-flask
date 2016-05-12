@@ -142,3 +142,16 @@ class RootTest(BaseTest):
         self.assertEquals(302, response.status_code)
         expected_path = url_for('secret_page')
         self.assertIn(expected_path, urlparse(response.location).path)
+
+    def test_logout_kills_session(self):
+        with self.app.test_client() as client:
+            with client.session_transaction() as current_session:
+                current_session['user_email'] = self.email
+                current_session['confirmation_code'] = '1234'
+            response = client.get(url_for('logout'))
+            self.assertNotIn('confirmation_code', session)
+            self.assertNotIn('user_email', session)
+        self.assertEquals(302, response.status_code)
+        expected_path = url_for('root')
+        self.assertIn(expected_path, urlparse(response.location).path)
+        self.assertFalse(current_user.is_authenticated)

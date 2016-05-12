@@ -2,6 +2,7 @@ from flask import render_template, request, url_for, flash, redirect, session
 import flask
 from flask.ext.login import login_required
 from flask.ext.login import login_user
+from flask.ext.login import logout_user
 from . import app
 from .models import User
 from .forms import LoginForm, SignUpForm
@@ -23,8 +24,8 @@ def secret_page():
 def sign_up():
     form = SignUpForm()
     if form.validate_on_submit():
-        session['user_email'] = form.email.data
-        User.save_from_dict(form.as_dict)
+        user = User.save_from_dict(form.as_dict)
+        session['user_email'] = user.email
         return redirect(url_for('confirmation'))
     return render_template('signup.html', form=form)
 
@@ -56,3 +57,10 @@ def confirmation():
     code = send_confirmation_code(user.international_phone_number)
     session['confirmation_code'] = code
     return render_template('confirmation.html', user=user)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    session.clear()
+    return redirect(url_for('root'))
