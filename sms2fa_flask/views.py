@@ -4,7 +4,7 @@ from flask.ext.login import login_required
 from flask.ext.login import login_user
 from . import app
 from .models import User
-from .forms import LoginForm
+from .forms import LoginForm, SignUpForm
 from .confirmation_sender import send_confirmation_code
 
 
@@ -17,6 +17,16 @@ def root():
 @login_required
 def secret_page():
     return ''
+
+
+@app.route('/sign-up', methods=['GET', 'POST'])
+def sign_up():
+    form = SignUpForm()
+    if form.validate_on_submit():
+        session['user_email'] = form.email.data
+        User.save_from_dict(form.as_dict)
+        return redirect(url_for('confirmation'))
+    return render_template('signup.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])

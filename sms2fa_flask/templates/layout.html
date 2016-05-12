@@ -1,4 +1,5 @@
 {% import "bootstrap/utils.html" as util %}
+{% import "bootstrap/wtf.html" as wtf %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,10 +28,10 @@
               </li>
             {% else %}
               <li>
-                <a href='/sign-up'>Sign Up</a>
+                <a href='{{ url_for('sign_up') }}'>Sign Up</a>
               </li>
               <li>
-                <a href='/sign-in'>Sign In</a>
+                <a href='{{ url_for('login') }}'>Sign In</a>
               </li>
             {% endif %}
           </ul>
