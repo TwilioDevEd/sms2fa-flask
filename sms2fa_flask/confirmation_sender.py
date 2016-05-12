@@ -13,3 +13,7 @@ def send_confirmation_code(to_number):
                            from_=twilio_number,
                            body=code)
     return code
+
+
+def generate_code():
+    return str(random.randrange(100000, 999999))
