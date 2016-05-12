@@ -64,25 +64,25 @@ class RootTest(BaseTest):
             self.assertEquals(data['email'], session['user_email'])
             self.assertFalse(current_user.is_authenticated)
 
-    def test_login_success_redirects(self):
+    def test_sign_in_success_redirects(self):
         data = {'email': self.email, 'password': self.password}
-        response = self.client.post(url_for('login'), data=data)
+        response = self.client.post(url_for('sign_in'), data=data)
         self.assertEquals(302, response.status_code)
         expected_path = url_for('confirmation')
         self.assertIn(expected_path, urlparse(response.location).path)
 
-    def test_login_success_puts_user_email_in_session(self):
+    def test_sign_in_success_puts_user_email_in_session(self):
         data = {'email': self.email, 'password': self.password}
         with self.app.test_client() as client:
-            client.post(url_for('login'), data=data)
+            client.post(url_for('sign_in'), data=data)
             self.assertIn('user_email', session)
             self.assertEquals(self.email, session['user_email'])
             self.assertFalse(current_user.is_authenticated)
 
-    def test_login_failure(self):
+    def test_sign_in_failure(self):
         data = {'email': self.email, 'password': 'I am a hacker'}
         with self.app.test_client() as client:
-            response = client.post(url_for('login'), data=data)
+            response = client.post(url_for('sign_in'), data=data)
             self.assertEquals(200, response.status_code)
             self.assertIn('Welcome back', response.data.decode('utf8'))
             self.assertIn('Wrong user/password.', response.data.decode('utf8'))

@@ -30,8 +30,8 @@ def sign_up():
     return render_template('signup.html', form=form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/sign_in', methods=['GET', 'POST'])
+def sign_in():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.get(form.email.data)
@@ -40,7 +40,7 @@ def login():
                 session['user_email'] = user.email
                 return redirect(url_for('confirmation'))
         flash('Wrong user/password.', 'error')
-    return render_template('login.html', form=form)
+    return render_template('sign_in.html', form=form)
 
 
 @app.route('/confirmation', methods=['GET', 'POST'])
