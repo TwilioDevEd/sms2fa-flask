@@ -26,6 +26,7 @@ def sign_up():
     if form.validate_on_submit():
         user = User.save_from_dict(form.as_dict)
         session['user_email'] = user.email
+        send_confirmation_code(user.international_phone_number)
         return redirect(url_for('confirmation'))
     return render_template('signup.html', form=form)
 
@@ -41,6 +42,7 @@ def sign_in():
             return redirect(url_for('confirmation'))
         flash('Wrong user/password.', 'error')
 
+    send_confirmation_code(user.international_phone_number)
     return render_template('sign_in.html', form=form)
 
 
@@ -54,8 +56,6 @@ def confirmation():
             return redirect(url_for('secret_page'))
         flash('Wrong code. Please try again.', 'error')
 
-    code = send_confirmation_code(user.international_phone_number)
-    session['confirmation_code'] = code
     return render_template('confirmation.html', user=user)
 
 

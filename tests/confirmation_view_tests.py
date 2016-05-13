@@ -1,5 +1,5 @@
 from .base import BaseTest
-from flask import url_for, session
+from flask import url_for
 from flask.ext.login import current_user
 import six
 from mock import MagicMock
@@ -32,14 +32,6 @@ class ConfirmationPageTest(BaseTest):
             response = client.get(url_for('confirmation'))
         self.assertIn(self.default_user.international_phone_number,
                       response.data.decode('utf8'))
-
-    def test_confirmation_page_puts_confirmation_code_on_session(self):
-        views.send_confirmation_code = MagicMock(return_value='random_code')
-        with self.app.test_client() as client:
-            with client.session_transaction() as current_session:
-                current_session['user_email'] = self.email
-            client.get(url_for('confirmation'))
-            self.assertEquals('random_code', session.get('confirmation_code'))
 
     def test_confirmation_page_authenticates_on_success(self):
         with self.app.test_client() as client:
