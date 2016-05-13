@@ -1,5 +1,5 @@
 from flask import render_template, request, url_for, flash, redirect, session
-import flask
+from flask import abort
 from flask.ext.login import login_required
 from flask.ext.login import login_user
 from flask.ext.login import logout_user
@@ -46,9 +46,7 @@ def sign_in():
 
 @app.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
-    user = User.query.get(session.get('user_email', ''))
-    if not user:
-        flask.abort(401)
+    user = User.query.get(session.get('user_email', '')) or abort(401)
 
     if request.method == 'POST':
         if request.form['verification_code'] == session['confirmation_code']:
