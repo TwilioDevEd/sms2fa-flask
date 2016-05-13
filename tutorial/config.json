@@ -1,6 +1,6 @@
 {
-    "title": "Learn You sms2fa-flask For Much Win",
-    "repo": "<your GitHub username>/<GitHub repo name>",
-    "description": "Thanks for writing a tutorial with Viewsaurus! This example tutorial will show you the basic functionality of Viewsaurus. Click the \"Start\" button below to see how Viewsaurus works.",
+    "title": "SMS Two-Factor Authentication with Twilio",
+    "description": "Learn to implement SMS two-factor authentication in your web app with Twilio. 2FA helps further secure your users' data by validating more than just a password. This tutorial will show you the code to make it happen.",
+    "repo": "TwilioDevEd/sms2fa-flask",
     "heroku": false
 }
