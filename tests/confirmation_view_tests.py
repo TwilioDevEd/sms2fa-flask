@@ -16,15 +16,13 @@ class ConfirmationPageTest(BaseTest):
         response = self.client.get(url_for('confirmation'))
         self.assertEquals(401, response.status_code)
 
-    def test_confirmation_page_puts_confirmation_code_on_session(self):
+    def test_confirmation_page_success_for_a_valid_session(self):
         views.send_confirmation_code = MagicMock(return_value='random_code')
         with self.app.test_client() as client:
             with client.session_transaction() as current_session:
                 current_session['user_email'] = self.email
             response = client.get(url_for('confirmation'))
             self.assertEquals(200, response.status_code)
-            self.assertIn('confirmation_code', session)
-            self.assertEquals('random_code', session['confirmation_code'])
 
     def test_confirmation_page_shows_current_phone(self):
         views.send_confirmation_code = MagicMock(return_value='1234')
@@ -32,9 +30,16 @@ class ConfirmationPageTest(BaseTest):
             with client.session_transaction() as current_session:
                 current_session['user_email'] = self.email
             response = client.get(url_for('confirmation'))
-        self.assertEquals(200, response.status_code)
         self.assertIn(self.default_user.international_phone_number,
                       response.data.decode('utf8'))
+
+    def test_confirmation_page_puts_confirmation_code_on_session(self):
+        views.send_confirmation_code = MagicMock(return_value='random_code')
+        with self.app.test_client() as client:
+            with client.session_transaction() as current_session:
+                current_session['user_email'] = self.email
+            client.get(url_for('confirmation'))
+            self.assertEquals('random_code', session.get('confirmation_code'))
 
     def test_confirmation_page_authenticates_on_success(self):
         with self.app.test_client() as client:
@@ -62,6 +67,6 @@ class ConfirmationPageTest(BaseTest):
                 current_session['confirmation_code'] = '1234'
             response = client.post(url_for('confirmation'),
                                    data={'verification_code': '1234'})
-        self.assertEquals(302, response.status_code)
         expected_path = url_for('secret_page')
+        self.assertEquals(302, response.status_code)
         self.assertIn(expected_path, urlparse(response.location).path)
