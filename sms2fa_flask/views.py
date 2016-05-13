@@ -52,6 +52,7 @@ def confirmation():
         if request.form['verification_code'] == session['confirmation_code']:
             login_user(user)
             return redirect(url_for('secret_page'))
+        flash('Wrong code. Please try again.', 'error')
 
     code = send_confirmation_code(user.international_phone_number)
     session['confirmation_code'] = code
