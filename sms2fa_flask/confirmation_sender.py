@@ -5,10 +5,10 @@ import random
 
 
 def send_confirmation_code(to_number):
-    code = generate_code()
-    send_sms(to_number, code)
-    session['confirmation_code'] = code
-    return code
+    verification_code = generate_code()
+    send_sms(to_number, verification_code)
+    session['confirmation_code'] = verification_code
+    return verification_code
 
 
 def generate_code():
