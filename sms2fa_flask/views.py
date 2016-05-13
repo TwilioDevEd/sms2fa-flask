@@ -36,7 +36,7 @@ def sign_in():
 
     if form.validate_on_submit():
         user = User.query.get(form.email.data)
-        if user and user.password_valid(form.password.data):
+        if user and user.is_password_valid(form.password.data):
             session['user_email'] = user.email
             return redirect(url_for('confirmation'))
         flash('Wrong user/password.', 'error')

@@ -25,7 +25,7 @@ class SignUpTest(BaseTest):
 
         user = User.query.get(self.data['email'])
         self.assertTrue(user)
-        self.assertTrue(user.password_valid(self.data['password']))
+        self.assertTrue(user.is_password_valid(self.data['password']))
         self.assertEquals(user.phone_number, self.data['phone_number'])
 
     def test_sign_up_success_redirects_to_confirmation(self):
