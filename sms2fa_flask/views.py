@@ -51,7 +51,7 @@ def confirmation():
     user = User.query.get(session.get('user_email', '')) or abort(401)
 
     if request.method == 'POST':
-        if request.form['verification_code'] == session['confirmation_code']:
+        if request.form['verification_code'] == session['verification_code']:
             login_user(user)
             return redirect(url_for('secret_page'))
         flash('Wrong code. Please try again.', 'error')

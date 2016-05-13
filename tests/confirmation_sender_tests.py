@@ -16,4 +16,4 @@ class ConfirmationSenderTest(BaseTest):
                     from_=self.app.config['TWILIO_NUMBER'],
                     to=u'+15551234321'
             )
-            self.assertEquals('random_code', session.get('confirmation_code'))
+            self.assertEquals('random_code', session.get('verification_code'))
