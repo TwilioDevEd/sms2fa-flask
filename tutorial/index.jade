@@ -1,36 +1,152 @@
-.chapter(data-title='Your New Viewsaurus Tutorial')
-  .step(data-title='Welcome!', data-file='tutorial/config.json')
-    h2 Welcome to Viewsaurus
+.step(
+  data-title='How it Works',
+  data-file='sms2fa_flask/confirmation_sender.py')
+  :markdown
+    ## About this Application
 
-    p Thanks for writing a Viewsaurus tutorial! If you're new to Viewsaurus, feel free to click through this brief tutorial showing you how a Viewsaurus tutorial is structured.
+    This [Flask](http://flask.pocoo.org/) application example
+    demonstrates how to implement an SMS two-factor authentication using Twilio.
 
-    p The tutorial's navigation controls are located above this text. Use <i class="fa fa-fw fa-play"></i> to move to the next step of the tutorial. Use <i class="fa fa-fw fa-play fa-rotate-180"></i> to move to the previous step of the tutorial (if there is one). Use <i class="fa fa-fw fa-list"></i> to see an overview of all the steps in the tutorial.
+    _To run this application yourself [download the code and follow the
+    instructions on GitHub](https://github.com/TwilioDevEd/sms2fa-flask)._
 
-    p Let's begin by walking through the files generated for you in the `tutorial` directory with the `saurus new` command - those files are actually what is being used to show you this tutorial right now!
+    Adding two-factor authentication (2FA) to your web application increases the
+    security of your user's data. [Multi-factor
+    authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication)
+    determines the identity of a user in two steps: 
 
-  .step(data-title='Tutorial Configuration', data-file='tutorial/config.json')
-    :markdown
-      ## Configuration
+    1. First we validate the user with an email and password
 
-      The first file we'll look at is `config.json`. This contains high-level configuration information about your tutorial. This JSON file contains several properties you can declare about your tutorial:
+    2. Second, we validate using a mobile device, by sending them a one-time **verification code**.
 
-      * `title`: This is the title of your tutorial which will show on the first page
-      * `description`: This is a string of text that will appear above the "Start" button for your tutorial.
-      * `repo`: This is the GitHub repo that your code lives in. Right now we assume all projects are hosted there, but we'll likely make this agnostic in the future.
-      * `heroku`: This indicates whether or not your project supports instant deployment with the [Heroku Button](https://blog.heroku.com/archives/2014/8/7/heroku-button)
+    Once our user enters the verification code, we know they have received the SMS, and indeed are who they say they are. This is a standard SMS implementation.
 
-      Now, let's take a look at the first file that contains the actual content of the tutorial, `index.jade`.
+    For a slightly more advanced implementation using [Authy](https://www.twilio.com/authy) One-Touch checkout this [tutorial](//www.twilio.com/docs/tutorials/walkthrough/two-factor-authentication/python/flask).
 
-  .step(data-title='Step Two')
-    h2 Under Construction
+    Let's get started!
 
-    p more tutorial to come.
+    ---
 
-  //- Example: include markdown file
-    .step(data-title='Step Three', data-file='', data-highlight='')
-      include:markdown three.md
+    **See Also:**
 
-  //- Example: include jade file (don't need file extension)
-    .step(data-title='Step Four', data-file='', data-highlight='')
-      include four
+    * [REST API: Sending SMS or MMS](//www.twilio.com/docs/api/rest/sending-messages)
 
+.step(
+  data-title='Generating a Verification Code',
+  data-file='sms2fa_flask/confirmation_sender.py',
+  data-highlight='14-15')
+  :markdown
+    ## Generating a Verification Code
+
+    Once our user logs in we need to send them a _verification code_.
+
+    To generate our _verification code_ we use `random.randrange` which can take a
+    _range_ as an argument. Considering the current implementation our _6-digit
+    verification code_ could be any number between **100000** and **999999**.
+
+    Next let's look at how we would send this in an SMS with Twilio.
+
+.step(
+  data-title='Sending a Verification Code',
+  data-file='sms2fa_flask/confirmation_sender.py',
+  data-highlight='18-25')
+  :markdown
+    ## Sending a Verification Code
+
+    The Twilio helper library allows us to easily send an SMS.
+
+    First we have to create an instance of a **Twilio Rest Client** with our
+    credentials. Now all we have to do to send an SMS using the REST API is to call `client.messages.create()` with the necessary parameters.
+
+    You can find your credentials at your [Twilio Account](//www.twilio.com/user/account/phone-numbers/incoming).
+
+    ---
+
+    **See Also:**
+
+    * [Twilio Python Helper Library](//www.twilio.com/docs/libraries/python)
+    * [Twilio: Sending a Text Message](//www.twilio.com/docs/quickstart/python/sms/sending-via-rest)
+
+
+.step(
+  data-title='Registering a User',
+  data-file='sms2fa_flask/views.py',
+  data-highlight='23-31')
+  :markdown
+    ## Registering a User
+
+    When a **user** signs up for our website, this controller creates the **user** and sends them a _verification code_.
+
+    In order to do two-factor authentication we need to make sure we ask for the
+    user's **phone number**.
+
+    Let's see how we implemented the `send_confirmation_code` function.
+
+    ---
+
+    **See Also:**
+
+    * [Getting Started with Rails](//guides.rubyonrails.org/getting_started.html)
+
+.step(
+  data-title='Putting It All Together',
+  data-file='sms2fa_flask/confirmation_sender.py',
+  data-highlight='7-11')
+  :markdown
+    ## Putting It All Together
+
+    Using the building blocks we've created in the previous steps we can now pull it all together.
+
+    Notice we update the user's session with the _verification code_ since we'll need to look it up to verify the user.
+
+    Let's take a look on how to implement the actual 2-Step verification.
+
+    ---
+
+    **See Also:**
+
+    * [Using Services to Keep Your Rails Controllers Clean and DRY](//blog.engineyard.com/2014/keeping-your-rails-controllers-dry-with-services)
+
+.step(
+  data-title='Implementing the 2-Step Verification',
+  data-file='sms2fa_flask/views.py',
+  data-highlight='49-59')
+  :markdown
+    ## Implementing the 2-Step Verification
+
+    When the **user** receives an SMS with the _verification code_ we need to
+    ensure the given code is valid.
+
+    This validation is achieved by comparing the user's session **verification code**
+    with the _verification code_ the user inputs on the form.
+
+    ![Confirm Verification Code](http://howtodocs.s3.amazonaws.com/sms-2fa-authentication.png)
+
+    If the validation was successful the application allows the user to have
+    access to the protected content. Otherwise the application will prompt for
+    the _verification code_ once again.
+
+.step
+  :markdown
+    ## Where to next?
+
+    That's it! We've just implemented an SMS Two-Factor Authenticated
+    application. If you're a Rails developer working with Twilio, you might want
+    to check out these other tutorials.
+
+    [**Workflow Automation**](//www.twilio.com/docs/tutorials/walkthrough/workflow-automation/ruby/rails)
+
+    Increase your rate of response by automating the workflows that are key
+    to your business. In this tutorial, learn how to build a ready-for-scale
+    automated SMS workflow, for a vacation rental company.
+
+    [**Masked Numbers**](//www.twilio.com/docs/tutorials/walkthrough/masked-numbers/ruby/rails)
+
+    Protect your users' privacy by anonymously connecting them with Twilio
+    Voice and SMS. Learn how to create disposable phone numbers on-demand,
+    so two users can communicate without exchanging personal information.
+
+    ### Did this help?
+
+    Thanks for checking out this tutorial! If you have any feedback
+    to share with us, we'd love to hear it. [Contact the Twilio Developer Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
