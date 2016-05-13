@@ -3,7 +3,6 @@ from wtforms import TextField, PasswordField, validators
 from flask_wtf.html5 import TelField, EmailField
 from wtforms.validators import DataRequired
 import phonenumbers
-import bcrypt
 
 
 class LoginForm(Form):

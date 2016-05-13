@@ -1,7 +1,7 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import UserMixin
-import bcrypt
 import phonenumbers
+from passlib.hash import bcrypt
 from phonenumbers import PhoneNumberFormat
 db = SQLAlchemy()
 
@@ -22,14 +22,11 @@ class User(db.Model, UserMixin):
         db.save(user)
         return user
 
-    def password_valid(self, pwd):
-        pwd_hash = self.password.decode('utf8').encode('utf8')
-        return bcrypt.hashpw(pwd, pwd_hash) == pwd_hash
+    def password_valid(self, given_password):
+        return bcrypt.verify(given_password, self.password)
 
     def set_password(self, new_password):
-        new_password = new_password.encode('utf8')
-        hashed_password = bcrypt.hashpw(new_password, bcrypt.gensalt())
-        self.password = hashed_password
+        self.password = bcrypt.encrypt(new_password)
 
     @property
     def international_phone_number(self):
