@@ -37,7 +37,7 @@ class ConfirmationPageTest(BaseTest):
         with self.app.test_client() as client:
             with client.session_transaction() as current_session:
                 current_session['user_email'] = self.email
-                current_session['confirmation_code'] = '1234'
+                current_session['verification_code'] = '1234'
             client.post(url_for('confirmation'),
                         data={'verification_code': '1234'})
             self.assertTrue(current_user.is_authenticated)
@@ -47,7 +47,7 @@ class ConfirmationPageTest(BaseTest):
         with self.app.test_client() as client:
             with client.session_transaction() as current_session:
                 current_session['user_email'] = self.email
-                current_session['confirmation_code'] = '1234'
+                current_session['verification_code'] = '1234'
             client.post(url_for('confirmation'),
                         data={'verification_code': 'wrong_one'})
             self.assertFalse(current_user.is_authenticated)
@@ -56,7 +56,7 @@ class ConfirmationPageTest(BaseTest):
         with self.app.test_client() as client:
             with client.session_transaction() as current_session:
                 current_session['user_email'] = self.email
-                current_session['confirmation_code'] = '1234'
+                current_session['verification_code'] = '1234'
             response = client.post(url_for('confirmation'),
                                    data={'verification_code': '1234'})
         expected_path = url_for('secret_page')
