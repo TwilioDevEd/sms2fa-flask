@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Learn You sms2fa-flask For Much Win</title><style>body, html {
+<!DOCTYPE html><html><head><title>SMS Two-Factor Authentication with Twilio</title><style>body, html {
   height:100%;
   width:100%;
   padding:0;
@@ -9,16 +9,84 @@
 .wrapper {
   height:100%;
   width:100%;
-}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Learn You sms2fa-flask For Much Win"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Learn You sms2fa-flask For Much Win</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Thanks for writing a tutorial with Viewsaurus! This example tutorial will show you the basic functionality of Viewsaurus. Click the &quot;Start&quot; button below to see how Viewsaurus works.</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Your New Viewsaurus Tutorial" class="chapter"><div data-title="Welcome!" data-file="tutorial/config.json" class="step"><h2>Welcome to Viewsaurus</h2><p>Thanks for writing a Viewsaurus tutorial! If you're new to Viewsaurus, feel free to click through this brief tutorial showing you how a Viewsaurus tutorial is structured.</p><p>The tutorial's navigation controls are located above this text. Use <i class="fa fa-fw fa-play"></i> to move to the next step of the tutorial. Use <i class="fa fa-fw fa-play fa-rotate-180"></i> to move to the previous step of the tutorial (if there is one). Use <i class="fa fa-fw fa-list"></i> to see an overview of all the steps in the tutorial.</p><p>Let's begin by walking through the files generated for you in the `tutorial` directory with the `saurus new` command - those files are actually what is being used to show you this tutorial right now!</p></div><div data-title="Tutorial Configuration" data-file="tutorial/config.json" class="step"><h2 id="configuration">Configuration</h2>
-<p>The first file we&#39;ll look at is <code>config.json</code>. This contains high-level configuration information about your tutorial. This JSON file contains several properties you can declare about your tutorial:</p>
+}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="SMS Two-Factor Authentication with Twilio"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">SMS Two-Factor Authentication with Twilio</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn to implement SMS two-factor authentication in your web app with Twilio. 2FA helps further secure your users' data by validating more than just a password. This tutorial will show you the code to make it happen.</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="How it Works" data-file="sms2fa_flask/confirmation_sender.py" class="step"><h2 id="about-this-application">About this Application</h2>
+<p>This <a href="http://flask.pocoo.org/">Flask</a> application example
+demonstrates how to implement an SMS two-factor authentication using Twilio.</p>
+<p><em>To run this application yourself <a href="https://github.com/TwilioDevEd/sms2fa-flask">download the code and follow the
+instructions on GitHub</a>.</em></p>
+<p>Adding two-factor authentication (2FA) to your web application increases the
+security of your user&#39;s data. <a href="http://en.wikipedia.org/wiki/Multi-factor_authentication">Multi-factor
+authentication</a>
+determines the identity of a user in two steps: </p>
+<ol>
+<li><p>First we validate the user with an email and password</p>
+</li>
+<li><p>Second, we validate using a mobile device, by sending them a one-time <strong>verification code</strong>.</p>
+</li>
+</ol>
+<p>Once our user enters the verification code, we know they have received the SMS, and indeed are who they say they are. This is a standard SMS implementation.</p>
+<p>For a slightly more advanced implementation using <a href="https://www.twilio.com/authy">Authy</a> One-Touch checkout this <a href="//www.twilio.com/docs/tutorials/walkthrough/two-factor-authentication/python/flask">tutorial</a>.</p>
+<p>Let&#39;s get started!</p>
+<hr>
+<p><strong>See Also:</strong></p>
 <ul>
-<li><code>title</code>: This is the title of your tutorial which will show on the first page</li>
-<li><code>description</code>: This is a string of text that will appear above the &quot;Start&quot; button for your tutorial.</li>
-<li><code>repo</code>: This is the GitHub repo that your code lives in. Right now we assume all projects are hosted there, but we&#39;ll likely make this agnostic in the future.</li>
-<li><code>heroku</code>: This indicates whether or not your project supports instant deployment with the <a href="https://blog.heroku.com/archives/2014/8/7/heroku-button">Heroku Button</a></li>
+<li><a href="//www.twilio.com/docs/api/rest/sending-messages">REST API: Sending SMS or MMS</a></li>
 </ul>
-<p>Now, let&#39;s take a look at the first file that contains the actual content of the tutorial, <code>index.jade</code>.</p>
-</div><div data-title="Step Two" class="step"><h2>Under Construction</h2><p>more tutorial to come.</p></div></div>
-<div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="tutorial/config.json" data-mode="json">ewogICAgInRpdGxlIjogIkxlYXJuIFlvdSBzbXMyZmEtZmxhc2sgRm9yIE11Y2ggV2luIiwKICAgICJyZXBvIjogIjx5b3VyIEdpdEh1YiB1c2VybmFtZT4vPEdpdEh1YiByZXBvIG5hbWU+IiwKICAgICJkZXNjcmlwdGlvbiI6ICJUaGFua3MgZm9yIHdyaXRpbmcgYSB0dXRvcmlhbCB3aXRoIFZpZXdzYXVydXMhIFRoaXMgZXhhbXBsZSB0dXRvcmlhbCB3aWxsIHNob3cgeW91IHRoZSBiYXNpYyBmdW5jdGlvbmFsaXR5IG9mIFZpZXdzYXVydXMuIENsaWNrIHRoZSBcIlN0YXJ0XCIgYnV0dG9uIGJlbG93IHRvIHNlZSBob3cgVmlld3NhdXJ1cyB3b3Jrcy4iLAogICAgImhlcm9rdSI6IGZhbHNlCn0=</textarea>
+</div><div data-title="Generating a Verification Code" data-file="sms2fa_flask/confirmation_sender.py" data-highlight="14-15" class="step"><h2 id="generating-a-verification-code">Generating a Verification Code</h2>
+<p>Once our user logs in we need to send them a <em>verification code</em>.</p>
+<p>To generate our <em>verification code</em> we use <code>random.randrange</code> which can take a
+<em>range</em> as an argument. Considering the current implementation our <em>6-digit
+verification code</em> could be any number between <strong>100000</strong> and <strong>999999</strong>.</p>
+<p>Next let&#39;s look at how we would send this in an SMS with Twilio.</p>
+</div><div data-title="Sending a Verification Code" data-file="sms2fa_flask/confirmation_sender.py" data-highlight="18-25" class="step"><h2 id="sending-a-verification-code">Sending a Verification Code</h2>
+<p>The Twilio helper library allows us to easily send an SMS.</p>
+<p>First we have to create an instance of a <strong>Twilio Rest Client</strong> with our
+credentials. Now all we have to do to send an SMS using the REST API is to call <code>client.messages.create()</code> with the necessary parameters.</p>
+<p>You can find your credentials at your <a href="//www.twilio.com/user/account/phone-numbers/incoming">Twilio Account</a>.</p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//www.twilio.com/docs/libraries/python">Twilio Python Helper Library</a></li>
+<li><a href="//www.twilio.com/docs/quickstart/python/sms/sending-via-rest">Twilio: Sending a Text Message</a></li>
+<li><a href="//flask-login.readthedocs.io/en/latest/">Flask-Login: Flask Library</a></li>
+</ul>
+</div><div data-title="Registering a User" data-file="sms2fa_flask/views.py" data-highlight="23-31" class="step"><h2 id="registering-a-user">Registering a User</h2>
+<p>When a <strong>user</strong> signs up for our website, this controller creates the <strong>user</strong> and sends them a <em>verification code</em>.</p>
+<p>In order to do two-factor authentication we need to make sure we ask for the
+user&#39;s <strong>phone number</strong>.</p>
+<p>Let&#39;s see how we implemented the <code>send_confirmation_code</code> function.</p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//flask.pocoo.org/docs/0.10/quickstart/">Getting Started with Flask</a></li>
+</ul>
+</div><div data-title="Putting It All Together" data-file="sms2fa_flask/confirmation_sender.py" data-highlight="7-11" class="step"><h2 id="putting-it-all-together">Putting It All Together</h2>
+<p>Using the building blocks we&#39;ve created in the previous steps we can now pull it all together.</p>
+<p>Notice we update the user&#39;s session with the <em>verification code</em> since we&#39;ll need to look it up to verify the user.</p>
+<p>Let&#39;s take a look on how to implement the actual 2-Step verification.</p>
+</div><div data-title="Implementing the 2-Step Verification" data-file="sms2fa_flask/views.py" data-highlight="49-59" class="step"><h2 id="implementing-the-2-step-verification">Implementing the 2-Step Verification</h2>
+<p>When the <strong>user</strong> receives an SMS with the <em>verification code</em> we need to
+ensure the given code is valid.</p>
+<p>This validation is achieved by comparing the user&#39;s session <strong>verification code</strong>
+with the <em>verification code</em> the user inputs on the form.</p>
+<p><img src="http://howtodocs.s3.amazonaws.com/sms-2fa-authentication.png" alt="Confirm Verification Code"></p>
+<p>If the validation was successful the application allows the user to have
+access to the protected content. Otherwise the application will prompt for
+the <em>verification code</em> once again.</p>
+</div><div class="step"><h2 id="where-to-next-">Where to next?</h2>
+<p>That&#39;s it! We&#39;ve just implemented an SMS Two-Factor Authenticated
+application. If you&#39;re a Python developer working with Twilio, you might want
+to check out these other tutorials.</p>
+<p><a href="//www.twilio.com/docs/tutorials/walkthrough/automated-survey/python/flask"><strong>Automated Survey</strong></a></p>
+<p>Instantly collect structured data from your users with a survey conducted over a voice call or SMS text messages. </p>
+<p><a href="//www.twilio.com/docs/tutorials/walkthrough/click-to-call/python/flask"><strong>Click to Call</strong></a></p>
+<p>Click-to-call enables your company to convert web traffic into phone calls with the click of a button.
+Learn how to implement it in minutes.</p>
+<h3 id="did-this-help-">Did this help?</h3>
+<p>Thanks for checking out this tutorial! If you have any feedback
+to share with us, we&#39;d love to hear it. <a href="mailto:deved-oss@twilio.com">Contact the Twilio Developer Education Team</a> to let us know what you think.</p>
 </div>
-</div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/&lt;your GitHub username&gt;/&lt;GitHub repo name&gt;" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>
+<div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="sms2fa_flask/confirmation_sender.py" data-mode="python">ZnJvbSB0d2lsaW8ucmVzdCBpbXBvcnQgVHdpbGlvUmVzdENsaWVudApmcm9tIC4gaW1wb3J0IGFwcApmcm9tIGZsYXNrIGltcG9ydCBzZXNzaW9uCmltcG9ydCByYW5kb20KCgpkZWYgc2VuZF9jb25maXJtYXRpb25fY29kZSh0b19udW1iZXIpOgogICAgdmVyaWZpY2F0aW9uX2NvZGUgPSBnZW5lcmF0ZV9jb2RlKCkKICAgIHNlbmRfc21zKHRvX251bWJlciwgdmVyaWZpY2F0aW9uX2NvZGUpCiAgICBzZXNzaW9uWyd2ZXJpZmljYXRpb25fY29kZSddID0gdmVyaWZpY2F0aW9uX2NvZGUKICAgIHJldHVybiB2ZXJpZmljYXRpb25fY29kZQoKCmRlZiBnZW5lcmF0ZV9jb2RlKCk6CiAgICByZXR1cm4gc3RyKHJhbmRvbS5yYW5kcmFuZ2UoMTAwMDAwLCA5OTk5OTkpKQoKCmRlZiBzZW5kX3Ntcyh0b19udW1iZXIsIGJvZHkpOgogICAgYWNjb3VudF9zaWQgPSBhcHAuY29uZmlnWydUV0lMSU9fQUNDT1VOVF9TSUQnXQogICAgYXV0aF90b2tlbiA9IGFwcC5jb25maWdbJ1RXSUxJT19BVVRIX1RPS0VOJ10KICAgIHR3aWxpb19udW1iZXIgPSBhcHAuY29uZmlnWydUV0lMSU9fTlVNQkVSJ10KICAgIGNsaWVudCA9IFR3aWxpb1Jlc3RDbGllbnQoYWNjb3VudF9zaWQsIGF1dGhfdG9rZW4pCiAgICBjbGllbnQubWVzc2FnZXMuY3JlYXRlKHRvPXRvX251bWJlciwKICAgICAgICAgICAgICAgICAgICAgICAgICAgZnJvbV89dHdpbGlvX251bWJlciwKICAgICAgICAgICAgICAgICAgICAgICAgICAgYm9keT1ib2R5KQo=</textarea>
+<textarea class="saurus-file" data-file="sms2fa_flask/views.py" data-mode="python">ZnJvbSBmbGFzayBpbXBvcnQgcmVuZGVyX3RlbXBsYXRlLCByZXF1ZXN0LCB1cmxfZm9yLCBmbGFzaCwgcmVkaXJlY3QsIHNlc3Npb24KZnJvbSBmbGFzayBpbXBvcnQgYWJvcnQKZnJvbSBmbGFzay5leHQubG9naW4gaW1wb3J0IGxvZ2luX3JlcXVpcmVkCmZyb20gZmxhc2suZXh0LmxvZ2luIGltcG9ydCBsb2dpbl91c2VyCmZyb20gZmxhc2suZXh0LmxvZ2luIGltcG9ydCBsb2dvdXRfdXNlcgpmcm9tIC4gaW1wb3J0IGFwcApmcm9tIC5tb2RlbHMgaW1wb3J0IFVzZXIKZnJvbSAuZm9ybXMgaW1wb3J0IExvZ2luRm9ybSwgU2lnblVwRm9ybQpmcm9tIC5jb25maXJtYXRpb25fc2VuZGVyIGltcG9ydCBzZW5kX2NvbmZpcm1hdGlvbl9jb2RlCgoKQGFwcC5yb3V0ZSgnLycpCmRlZiByb290KCk6CiAgICByZXR1cm4gcmVuZGVyX3RlbXBsYXRlKCdpbmRleC5odG1sJykKCgpAYXBwLnJvdXRlKCcvc2VjcmV0LXBhZ2UnKQpAbG9naW5fcmVxdWlyZWQKZGVmIHNlY3JldF9wYWdlKCk6CiAgICByZXR1cm4gcmVuZGVyX3RlbXBsYXRlKCdzZWNyZXRzLmh0bWwnKQoKCkBhcHAucm91dGUoJy9zaWduLXVwJywgbWV0aG9kcz1bJ0dFVCcsICdQT1NUJ10pCmRlZiBzaWduX3VwKCk6CiAgICBmb3JtID0gU2lnblVwRm9ybSgpCiAgICBpZiBmb3JtLnZhbGlkYXRlX29uX3N1Ym1pdCgpOgogICAgICAgIHVzZXIgPSBVc2VyLnNhdmVfZnJvbV9kaWN0KGZvcm0uYXNfZGljdCkKICAgICAgICBzZXNzaW9uWyd1c2VyX2VtYWlsJ10gPSB1c2VyLmVtYWlsCiAgICAgICAgc2VuZF9jb25maXJtYXRpb25fY29kZSh1c2VyLmludGVybmF0aW9uYWxfcGhvbmVfbnVtYmVyKQogICAgICAgIHJldHVybiByZWRpcmVjdCh1cmxfZm9yKCdjb25maXJtYXRpb24nKSkKICAgIHJldHVybiByZW5kZXJfdGVtcGxhdGUoJ3NpZ251cC5odG1sJywgZm9ybT1mb3JtKQoKCkBhcHAucm91dGUoJy9zaWduX2luJywgbWV0aG9kcz1bJ0dFVCcsICdQT1NUJ10pCmRlZiBzaWduX2luKCk6CiAgICBmb3JtID0gTG9naW5Gb3JtKCkKCiAgICBpZiBmb3JtLnZhbGlkYXRlX29uX3N1Ym1pdCgpOgogICAgICAgIHVzZXIgPSBVc2VyLnF1ZXJ5LmdldChmb3JtLmVtYWlsLmRhdGEpCiAgICAgICAgaWYgdXNlciBhbmQgdXNlci5pc19wYXNzd29yZF92YWxpZChmb3JtLnBhc3N3b3JkLmRhdGEpOgogICAgICAgICAgICBzZXNzaW9uWyd1c2VyX2VtYWlsJ10gPSB1c2VyLmVtYWlsCiAgICAgICAgICAgIHJldHVybiByZWRpcmVjdCh1cmxfZm9yKCdjb25maXJtYXRpb24nKSkKICAgICAgICBmbGFzaCgnV3JvbmcgdXNlci9wYXNzd29yZC4nLCAnZXJyb3InKQoKICAgIHNlbmRfY29uZmlybWF0aW9uX2NvZGUodXNlci5pbnRlcm5hdGlvbmFsX3Bob25lX251bWJlcikKICAgIHJldHVybiByZW5kZXJfdGVtcGxhdGUoJ3NpZ25faW4uaHRtbCcsIGZvcm09Zm9ybSkKCgpAYXBwLnJvdXRlKCcvY29uZmlybWF0aW9uJywgbWV0aG9kcz1bJ0dFVCcsICdQT1NUJ10pCmRlZiBjb25maXJtYXRpb24oKToKICAgIHVzZXIgPSBVc2VyLnF1ZXJ5LmdldChzZXNzaW9uLmdldCgndXNlcl9lbWFpbCcsICcnKSkgb3IgYWJvcnQoNDAxKQoKICAgIGlmIHJlcXVlc3QubWV0aG9kID09ICdQT1NUJzoKICAgICAgICBpZiByZXF1ZXN0LmZvcm1bJ3ZlcmlmaWNhdGlvbl9jb2RlJ10gPT0gc2Vzc2lvblsndmVyaWZpY2F0aW9uX2NvZGUnXToKICAgICAgICAgICAgbG9naW5fdXNlcih1c2VyKQogICAgICAgICAgICByZXR1cm4gcmVkaXJlY3QodXJsX2Zvcignc2VjcmV0X3BhZ2UnKSkKICAgICAgICBmbGFzaCgnV3JvbmcgY29kZS4gUGxlYXNlIHRyeSBhZ2Fpbi4nLCAnZXJyb3InKQoKICAgIHJldHVybiByZW5kZXJfdGVtcGxhdGUoJ2NvbmZpcm1hdGlvbi5odG1sJywgdXNlcj11c2VyKQoKCkBhcHAucm91dGUoJy9sb2dvdXQnKQpkZWYgbG9nb3V0KCk6CiAgICBsb2dvdXRfdXNlcigpCiAgICBzZXNzaW9uLmNsZWFyKCkKICAgIHJldHVybiByZWRpcmVjdCh1cmxfZm9yKCdyb290JykpCg==</textarea>
+</div>
+</div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/TwilioDevEd/sms2fa-flask" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>
