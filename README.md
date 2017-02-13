@@ -11,6 +11,10 @@
 -->
 SMS Two-Factor Authentication (SMS-2FA) helps keep your user accounts secure by validating two "factors" of identity. Most login systems only validate a password known by the user. You can make it harder for evildoers to compromise a user account by also validating something a user has, such as their mobile phone.
 
+**Note:** This project is not suitable for production use without modification. 2FA tokens are stored using Flask's built in
+session management, which exposes its contents in a client-side cookie. If you want to use this code in production, you
+should use something like [Flask-Session](https://pythonhosted.org/Flask-Session/) to store session data server-side.
+
 ## Local Development
 
 This project is built using [Flask](http://flask.pocoo.org/) web framework.
