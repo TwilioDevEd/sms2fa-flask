@@ -11,6 +11,7 @@ class DefaultConfig(object):
     TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', None)
     TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN', None)
     TWILIO_NUMBER = os.environ.get('TWILIO_NUMBER', None)
+    SESSION_TYPE = 'sqlalchemy'
 
 
 class DevelopmentConfig(DefaultConfig):
