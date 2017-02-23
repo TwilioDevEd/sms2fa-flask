@@ -11,6 +11,7 @@ class DefaultConfig(object):
     TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', None)
     TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN', None)
     TWILIO_NUMBER = os.environ.get('TWILIO_NUMBER', None)
+    SESSION_TYPE = 'sqlalchemy'
 
 
 class DevelopmentConfig(DefaultConfig):
@@ -24,6 +25,9 @@ class TestConfig(DefaultConfig):
                                os.path.join(basedir, 'test.sqlite'))
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     DEBUG = True
+    TWILIO_ACCOUNT_SID = 'AC2XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    TWILIO_AUTH_TOKEN = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    TWILIO_NUMBER = '+15551230987'
 
 config_env_files = {
     'test': 'sms2fa_flask.config.TestConfig',
