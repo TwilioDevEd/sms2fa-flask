@@ -51,8 +51,8 @@ This project is built using [Flask](http://flask.pocoo.org/) web framework.
    ```
 
    You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your
-   [Twilio Account Settings](https://www.twilio.com/user/account/settings).
-   You will also need a `TWILIO_NUMBER`, which you may find [here](https://www.twilio.com/user/account/phone-numbers/incoming).
+   [Twilio Account Settings](https://www.twilio.com/console).
+   You will also need a `TWILIO_NUMBER`, which you may find [here](https://www.twilio.com/console/phone-numbers/incoming).
 
    Run `source .env` to export the environment variables.
 
