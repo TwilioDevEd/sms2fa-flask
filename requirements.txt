@@ -13,7 +13,7 @@ Flask-Session==0.3.1
 
 # External libraries
 SQLAlchemy==1.0.11
-twilio==6.9.0
+twilio==6.42.0
 passlib==1.6.5
 bcrypt==2.0.0
 phonenumbers==8.3.0
