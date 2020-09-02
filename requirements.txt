@@ -16,7 +16,7 @@ SQLAlchemy==1.0.11
 twilio==6.9.0
 passlib==1.6.5
 bcrypt==2.0.0
-phonenumbers==8.3.0
+phonenumbers==8.12.9
 pysocks==1.6.6
 
 
