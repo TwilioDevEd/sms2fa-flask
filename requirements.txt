@@ -26,3 +26,4 @@ coverage==4.0.3
 xmlunittest==0.3.2
 lxml==3.4
 mock==2.0.0
+certifi>=2022.12.7 # not directly required, pinned by Snyk to avoid a vulnerability
